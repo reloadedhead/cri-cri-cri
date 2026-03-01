@@ -22,7 +22,7 @@ export function HitPointsCard({ character }: { character: Character }) {
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
-          <Heart className="w-4 h-4 fill-red-500" />
+          <Heart className="size-5 fill-red-500" />
           Hit Points
         </CardTitle>
       </CardHeader>
