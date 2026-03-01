@@ -70,12 +70,20 @@ export default function CharacterSheetPage() {
   }
 
   return (
-    <div>
-      <div className="max-w-6xl">
+    <div className="max-w-6xl gap-6 grid sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-4">
+      <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
         <CharacterHeaderCard character={character} />
-        <HitPointsCard character={character} />
-        <AbilityScoreCard character={character} />
+      </div>
 
+      <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
+        <HitPointsCard character={character} />
+      </div>
+
+      <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
+        <AbilityScoreCard character={character} />
+      </div>
+
+      <div className="sm:col-span-1 md:col-span-3 lg:hidden">
         <Tabs defaultValue="weapons" className="w-full">
           <TabsList className="w-full">
             <TabsTrigger className="w-full" value="weapons">
@@ -94,6 +102,16 @@ export default function CharacterSheetPage() {
             <ArmorCard character={character} />
           </TabsContent>
         </Tabs>
+      </div>
+
+      <div className="sm:hidden lg:flex items-center gap-6 lg:col-span-4">
+        <div className="w-full">
+          <WeaponsCard character={character} />
+        </div>
+
+        <div className="w-full">
+          <ArmorCard character={character} />
+        </div>
       </div>
     </div>
   );

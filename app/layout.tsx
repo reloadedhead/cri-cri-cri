@@ -174,7 +174,7 @@ export default function RootLayout({
             </div>
           </div>
         </nav>
-        <main className="relative flex min-h-[100dvh] flex-col overflow-hidden items-center justify-center bg-background px-5 md:py-24 py-[100px] bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]">
+        <main className="relative flex min-h-dvh flex-col overflow-hidden md:items-center py-24 bg-background px-5 bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]">
           {children}
         </main>
       </body>

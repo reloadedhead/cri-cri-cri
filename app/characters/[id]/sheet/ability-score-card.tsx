@@ -5,7 +5,7 @@ import { AbilityScore } from "./ability-score";
 
 export function AbilityScoreCard({ character }: { character: Character }) {
   return (
-    <Card className="mb-6">
+    <Card>
       <CardHeader>
         <CardTitle className="flex items-center gap-2">
           <Award className="size-5" />
