@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { useCharacter } from "@/hooks/use-character";
 import { Character } from "@/models/character";
@@ -51,7 +51,7 @@ export default function CreateCharacterModal({
     charisma: 10,
   });
 
-  const handleSubmit = async (e: SubmitEvent) => {
+  const handleSubmit = async (e: SubmitEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsCreating(true);
 
