@@ -11,15 +11,15 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
-import { Shield, Sword, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import { HitPointsCard } from "./hitpoints-card";
 import { CharacterHeaderCard } from "./character-header-card";
 import { AbilityScoreCard } from "./ability-score-card";
 import { WeaponsCard } from "./weapons-card";
 import { ArmorCard } from "./armor-card";
+import { SkillsCard } from "./skills-card";
 
 export default function CharacterSheetPage() {
   const params = useParams();
@@ -75,42 +75,50 @@ export default function CharacterSheetPage() {
         <CharacterHeaderCard character={character} />
       </div>
 
-      <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
-        <HitPointsCard character={character} />
-      </div>
-
-      <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
-        <AbilityScoreCard character={character} />
-      </div>
-
-      <div className="sm:col-span-1 md:col-span-3 lg:hidden">
-        <Tabs defaultValue="weapons" className="w-full">
-          <TabsList className="w-full">
-            <TabsTrigger className="w-full" value="weapons">
-              Weapons
-            </TabsTrigger>
-            <TabsTrigger className="w-full" value="armor">
-              Armor
-            </TabsTrigger>
-          </TabsList>
-
-          <TabsContent value="weapons">
-            <WeaponsCard character={character} />
-          </TabsContent>
-
-          <TabsContent value="armor">
-            <ArmorCard character={character} />
-          </TabsContent>
-        </Tabs>
-      </div>
-
-      <div className="sm:hidden lg:flex items-center gap-6 lg:col-span-4">
-        <div className="w-full">
-          <WeaponsCard character={character} />
+      <div className="grid lg:col-span-4 md:col-span-3 sm:col-span-1 sm:grid-cols-1 lg:grid-cols-6 gap-6">
+        <div className="col-span-2 hidden lg:block">
+          <SkillsCard character={character} />
         </div>
 
-        <div className="w-full">
-          <ArmorCard character={character} />
+        <div className="grid lg:col-span-4 grid-cols-1 lg:grid-cols-2 gap-6">
+          <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
+            <HitPointsCard character={character} />
+          </div>
+
+          <div className="sm:col-span-1 md:col-span-3 lg:col-span-4">
+            <AbilityScoreCard character={character} />
+          </div>
+
+          <div className="sm:col-span-1 md:col-span-3 lg:hidden">
+            <Tabs defaultValue="weapons" className="w-full">
+              <TabsList className="w-full">
+                <TabsTrigger className="w-full" value="weapons">
+                  Weapons
+                </TabsTrigger>
+                <TabsTrigger className="w-full" value="armor">
+                  Armor
+                </TabsTrigger>
+              </TabsList>
+
+              <TabsContent value="weapons">
+                <WeaponsCard character={character} />
+              </TabsContent>
+
+              <TabsContent value="armor">
+                <ArmorCard character={character} />
+              </TabsContent>
+            </Tabs>
+          </div>
+
+          <div className="hidden lg:flex items-center gap-6 lg:col-span-4">
+            <div className="w-full">
+              <WeaponsCard character={character} />
+            </div>
+
+            <div className="w-full">
+              <ArmorCard character={character} />
+            </div>
+          </div>
         </div>
       </div>
     </div>
