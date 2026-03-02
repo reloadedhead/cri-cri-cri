@@ -1,12 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { useCharacter } from "@/hooks/use-character";
-import { Character } from "@/models/character";
+import { useCharacterStore, type Character } from "@/store/use-character-store";
 import { Heart, Minus, Plus, RefreshCw } from "lucide-react";
 
 export function HitPointsCard({ character }: { character: Character }) {
-  const { adjustHP, resetHP } = useCharacter();
+  const { setHitPoints, rest } = useCharacterStore();
 
   const hpPercentage = (character.hp.current / character.hp.max) * 100;
 
@@ -16,7 +15,8 @@ export function HitPointsCard({ character }: { character: Character }) {
     return "bg-red-500";
   };
 
-  const onShortcutClick = (amount: number) => () => adjustHP(amount);
+  const onShortcutClick = (amount: number) => () =>
+    setHitPoints(character.id, character.hp.current + amount);
 
   return (
     <Card>
@@ -34,7 +34,7 @@ export function HitPointsCard({ character }: { character: Character }) {
 
           <Button
             size="sm"
-            onClick={resetHP}
+            onClick={() => rest(character.id, "long")}
             className="hover:bg-blue-100 dark:hover:bg-blue-950"
             disabled={character.hp.current === character.hp.max}
           >

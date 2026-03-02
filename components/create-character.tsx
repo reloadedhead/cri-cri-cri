@@ -2,7 +2,6 @@
 
 import { SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useCharacter } from "@/hooks/use-character";
 import { Character } from "@/models/character";
 import {
   Dialog,
@@ -15,6 +14,7 @@ import {
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { useCharacterStore } from "@/store/use-character-store";
 
 interface CreateCharacterModalProps {
   open: boolean;
@@ -30,7 +30,7 @@ export default function CreateCharacterModal({
   onOpenChange,
 }: CreateCharacterModalProps) {
   const router = useRouter();
-  const { createCharacter } = useCharacter();
+  const { add } = useCharacterStore();
   const [isCreating, setIsCreating] = useState(false);
 
   const [formData, setFormData] = useState({
@@ -99,15 +99,8 @@ export default function CreateCharacterModal({
       skills: [],
     };
 
-    try {
-      const id = await createCharacter(character);
-      onOpenChange(false);
-      router.push(`/character/${id}`);
-    } catch (error) {
-      console.error("Failed to create character:", error);
-    } finally {
-      setIsCreating(false);
-    }
+    const id = add(character);
+    router.push(`/character/${id}`);
   };
 
   const updateField = (field: string, value: string | number) => {

@@ -1,9 +1,7 @@
 // app/characters/[id]/sheet/page.tsx
 "use client";
 
-import { useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
-import { useCharacter } from "@/hooks/use-character";
 import {
   Card,
   CardContent,
@@ -20,24 +18,19 @@ import { AbilityScoreCard } from "./ability-score-card";
 import { WeaponsCard } from "./weapons-card";
 import { ArmorCard } from "./armor-card";
 import { SkillsCard } from "./skills-card";
+import { useCharacterStore } from "@/store/use-character-store";
 
 export default function CharacterSheetPage() {
   const params = useParams();
   const router = useRouter();
-  const { character, loadCharacter, isLoading, error } = useCharacter();
-  const characterId = params.id as string;
-
-  useEffect(() => {
-    if (characterId) {
-      loadCharacter(characterId);
-    }
-  }, [characterId, loadCharacter]);
+  const characterStore = useCharacterStore();
+  const character = characterStore.get(params.id as string);
 
   const handleBack = () => {
     router.push("/");
   };
 
-  if (isLoading) {
+  if (!characterStore.hasHydrated) {
     return (
       <div className="min-h-screen `bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
         <div className="text-center">
@@ -48,7 +41,7 @@ export default function CharacterSheetPage() {
     );
   }
 
-  if (error || !character) {
+  if (!character) {
     return (
       <div className="min-h-screen `bg-linear-to-br from-slate-100 to-slate-200 dark:from-slate-950 dark:to-slate-900 flex items-center justify-center">
         <Card className="max-w-md">
@@ -56,7 +49,7 @@ export default function CharacterSheetPage() {
             <CardTitle className="text-red-600">
               Error Loading Character
             </CardTitle>
-            <CardDescription>{error || "Character not found"}</CardDescription>
+            <CardDescription>Character not found</CardDescription>
           </CardHeader>
           <CardContent>
             <Button onClick={handleBack} className="w-full">
