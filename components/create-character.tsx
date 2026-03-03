@@ -2,7 +2,7 @@
 
 import { SubmitEvent, useState } from "react";
 import { useRouter } from "next/navigation";
-import { Character } from "@/models/character";
+import { Character, Class } from "@/models/character";
 import {
   Dialog,
   DialogContent,
@@ -15,6 +15,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useCharacterStore } from "@/store/use-character-store";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "./ui/select";
+import { useClassOptions } from "@/hooks/use-class-options";
 
 interface CreateCharacterModalProps {
   open: boolean;
@@ -32,11 +40,12 @@ export default function CreateCharacterModal({
   const router = useRouter();
   const { add } = useCharacterStore();
   const [isCreating, setIsCreating] = useState(false);
+  const classOptions = useClassOptions();
 
   const [formData, setFormData] = useState({
     name: "",
     race: "",
-    class: "",
+    class: "Druid",
     level: 1,
     maxHP: 10,
     ac: 10,
@@ -58,7 +67,7 @@ export default function CreateCharacterModal({
     const character: Character = {
       name: formData.name,
       race: formData.race,
-      class: formData.class,
+      class: formData.class as Class,
       level: formData.level,
       hp: {
         current: formData.maxHP,
@@ -146,13 +155,19 @@ export default function CreateCharacterModal({
             <div className="grid grid-cols-3 gap-4">
               <div className="space-y-2">
                 <Label htmlFor="class">Class *</Label>
-                <Input
-                  id="class"
-                  value={formData.class}
-                  onChange={(e) => updateField("class", e.target.value)}
-                  placeholder="Fighter"
-                  required
-                />
+                <Select>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {classOptions.map((option) => (
+                      <SelectItem value={option.value} key={option.value}>
+                        {option.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
               <div className="space-y-2">
                 <Label htmlFor="level">Level</Label>

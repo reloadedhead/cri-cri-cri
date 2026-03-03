@@ -49,7 +49,7 @@ export interface Skill {
 
 export interface Character {
   name: string;
-  class: string;
+  class: Class;
   race: string;
   level: number;
   hp: HitPoints;
@@ -62,3 +62,20 @@ export interface Character {
   armor: Armor[];
   skills: Skill[];
 }
+
+export const Classes = [
+  "Barbarian",
+  "Bard",
+  "Cleric",
+  "Druid",
+  "Fighter",
+  "Monk",
+  "Paladin",
+  "Ranger",
+  "Rogue",
+  "Sorcerer",
+  "Warlock",
+  "Wizard",
+] as const;
+
+export type Class = (typeof Classes)[number];
