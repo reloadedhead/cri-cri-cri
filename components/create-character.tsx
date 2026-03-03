@@ -23,6 +23,7 @@ import {
   SelectValue,
 } from "./ui/select";
 import { useClassOptions } from "@/hooks/use-class-options";
+import { useRaceOptions } from "@/hooks/use-race-options";
 
 interface CreateCharacterModalProps {
   open: boolean;
@@ -41,6 +42,7 @@ export default function CreateCharacterModal({
   const { add } = useCharacterStore();
   const [isCreating, setIsCreating] = useState(false);
   const classOptions = useClassOptions();
+  const raceOptions = useRaceOptions();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -142,13 +144,19 @@ export default function CreateCharacterModal({
               </div>
               <div className="space-y-2">
                 <Label htmlFor="race">Race *</Label>
-                <Input
-                  id="race"
-                  value={formData.race}
-                  onChange={(e) => updateField("race", e.target.value)}
-                  placeholder="Dwarf"
-                  required
-                />
+                <Select required>
+                  <SelectTrigger>
+                    <SelectValue />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {raceOptions.map((race) => (
+                      <SelectItem key={race.value} value={race.value}>
+                        {race.label}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
               </div>
             </div>
 

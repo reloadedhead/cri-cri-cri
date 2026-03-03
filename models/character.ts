@@ -79,3 +79,24 @@ export const Classes = [
 ] as const;
 
 export type Class = (typeof Classes)[number];
+
+export const Races = [
+  "Human",
+  "Elf",
+  "Dwarf",
+  "Halfling",
+  "Dragonborn",
+  "Gnome",
+  "Tiefling",
+  "Half-Elf",
+  "Half-Orc",
+  "Aasimar",
+  "Tabaxi",
+  "Tribal",
+  "Lizardfolk",
+  "Genasi",
+  "Firbolg",
+  "Warforged",
+] as const;
+
+export type Race = (typeof Races)[number];
