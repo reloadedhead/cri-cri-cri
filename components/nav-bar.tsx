@@ -1,6 +1,6 @@
 "use client";
 
-import { DicesIcon } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useParams } from "next/navigation";
 
@@ -15,7 +15,14 @@ export function Navbar() {
       <div className="mx-auto flex w-[1300px] text-foreground max-w-full items-center justify-between">
         <div className="flex items-center xl:gap-10 gap-10">
           <Link className="flex items-center gap-4" href="/">
-            <DicesIcon />
+            <Image
+              src="/icons/dice.svg"
+              alt="D20"
+              width={32}
+              height={32}
+              priority
+              className="rounded-md"
+            />
             <span className="font-bold text-lg">CriCriCri</span>
           </Link>
           <div className="items-center text-base font-base xl:gap-10 lg:flex gap-10 hidden">
