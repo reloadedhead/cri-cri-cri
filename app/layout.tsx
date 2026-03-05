@@ -1,51 +1,51 @@
+import { Navbar } from "@/components/nav-bar";
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/components/nav-bar";
 
 export const metadata: Metadata = {
-  title: "CriCriCri",
-  description: "Character sheets, easy.",
-  manifest: "/manifest.json",
-  icons: [
-    { rel: "icon", url: "/icons/dice-192.png" },
-    { rel: "apple-touch-icon", url: "/icons/dice-192.png" },
-  ],
+	title: "CriCriCri",
+	description: "Character sheets, easy.",
+	manifest: "/manifest.json",
+	icons: [
+		{ rel: "icon", url: "/icons/dice-192.png" },
+		{ rel: "apple-touch-icon", url: "/icons/dice-192.png" },
+	],
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
-  width: "device-width",
-  initialScale: 1,
-  maximumScale: 1,
-  userScalable: false,
+	themeColor: "#000000",
+	width: "device-width",
+	initialScale: 1,
+	maximumScale: 1,
+	userScalable: false,
 };
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+	variable: "--font-geist-sans",
+	subsets: ["latin"],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+	variable: "--font-geist-mono",
+	subsets: ["latin"],
 });
 
 export default function RootLayout({
-  children,
+	children,
 }: Readonly<{
-  children: React.ReactNode;
+	children: React.ReactNode;
 }>) {
-  return (
-    <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Navbar />
-        <main className="relative flex min-h-dvh flex-col overflow-hidden md:items-center py-24 bg-background px-5 bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]">
-          {children}
-        </main>
-      </body>
-    </html>
-  );
+	return (
+		<html lang="en">
+			<body
+				className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+			>
+				<Navbar />
+				<main className="relative flex min-h-dvh flex-col overflow-hidden md:items-center py-24 bg-background px-2 bg-[linear-gradient(to_right,#80808033_1px,transparent_1px),linear-gradient(to_bottom,#80808033_1px,transparent_1px)] bg-[size:70px_70px]">
+					{children}
+				</main>
+			</body>
+		</html>
+	);
 }
