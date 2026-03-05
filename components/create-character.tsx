@@ -66,7 +66,7 @@ export default function CreateCharacterModal({
     e.preventDefault();
     setIsCreating(true);
 
-    const character: Character = {
+    const character: Omit<Character, "id"> = {
       name: formData.name,
       race: formData.race,
       class: formData.class as Class,

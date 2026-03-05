@@ -48,6 +48,7 @@ export interface Skill {
 }
 
 export interface Character {
+  id: string;
   name: string;
   class: Class;
   race: string;
