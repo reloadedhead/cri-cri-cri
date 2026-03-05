@@ -8,7 +8,11 @@ import { persist, createJSONStorage } from "zustand/middleware";
 type CharacterState = {
 	characters: Character[];
 	get: (id: string) => Character | null;
-	add: (character: Omit<Character, "id">) => Character;
+	add: (
+		character: Omit<Character, "id" | "weapons" | "armor" | "hp"> & {
+			maxHp: number;
+		},
+	) => Character;
 	put: (character: Partial<Character> & { id: string }) => void;
 	remove: (id: string) => void;
 	clear: () => void;
@@ -32,7 +36,13 @@ export const useCharacterStore = create<CharacterState>()(
 			characters: [],
 			get: (id) => get().characters.find((c) => c.id === id) ?? null,
 			add: (character) => {
-				const created: Character = { ...character, id: crypto.randomUUID() };
+				const created: Character = {
+					...character,
+					id: crypto.randomUUID(),
+					weapons: [],
+					armor: [],
+					hp: { max: character.maxHp, current: character.maxHp },
+				};
 
 				set({ characters: [...get().characters, created] });
 
@@ -75,7 +85,8 @@ export const useCharacterStore = create<CharacterState>()(
 									...c,
 									hp: {
 										...c.hp,
-										current: type === "short" ? c.hp.max / 2 : c.hp.max,
+										current:
+											type === "short" ? c.hp.max / 2 : c.hp.max,
 									},
 								}
 							: c,

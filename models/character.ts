@@ -1,26 +1,14 @@
+import z from "zod";
+
 export const Abilities = [
-	"Strength",
-	"Dexterity",
-	"Constitution",
-	"Intelligence",
-	"Wisdom",
-	"Charisma",
+	"strength",
+	"dexterity",
+	"constitution",
+	"intelligence",
+	"wisdom",
+	"charisma",
 ] as const;
 export type Ability = (typeof Abilities)[number];
-
-export interface AbilityScore {
-	score: number;
-	modifier: number;
-}
-
-export interface AbilityScores {
-	Strength: AbilityScore;
-	Dexterity: AbilityScore;
-	Constitution: AbilityScore;
-	Intelligence: AbilityScore;
-	Wisdom: AbilityScore;
-	Charisma: AbilityScore;
-}
 
 export interface HitPoints {
 	current: number;
@@ -47,7 +35,7 @@ export interface Skill {
 	proficient: boolean;
 }
 
-export interface Character {
+export type Character = {
 	id: string;
 	name: string;
 	class: Class;
@@ -55,14 +43,11 @@ export interface Character {
 	level: number;
 	hp: HitPoints;
 	ac: number;
-	initiative: number;
 	proficiency: number;
 	speed: number;
-	abilities: AbilityScores;
 	weapons: Weapon[];
 	armor: Armor[];
-	skills: Skill[];
-}
+} & Record<Ability, number>;
 
 export const Classes = [
 	"Barbarian",

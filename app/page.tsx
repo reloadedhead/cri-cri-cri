@@ -66,7 +66,11 @@ export default function CharactersPage() {
 					<CardTitle className="text-2xl">Your Characters</CardTitle>
 					<CardDescription className="hidden md:flex items-center justify-end gap-4">
 						{characters.length > 0 ? (
-							<Button onClick={handleCreateNew} className="gap-2" size="sm">
+							<Button
+								onClick={handleCreateNew}
+								className="gap-2"
+								size="sm"
+							>
 								<Plus className="w-4 h-4" />
 								New Character
 							</Button>
@@ -95,7 +99,9 @@ export default function CharactersPage() {
 								>
 									<div className="flex items-center gap-2">
 										<Avatar className="size-8">
-											<AvatarFallback>{character.name.at(0)}</AvatarFallback>
+											<AvatarFallback>
+												{character.name.at(0)}
+											</AvatarFallback>
 										</Avatar>
 
 										<div className="flex flex-col">
@@ -133,7 +139,9 @@ export default function CharactersPage() {
 										<TableHead>Name</TableHead>
 										<TableHead>Class</TableHead>
 										<TableHead>Level</TableHead>
-										<TableHead className="text-right">Actions</TableHead>
+										<TableHead className="text-right">
+											Actions
+										</TableHead>
 									</TableRow>
 								</TableHeader>
 								<TableBody>
@@ -159,7 +167,9 @@ export default function CharactersPage() {
 												>
 													<Button
 														size="sm"
-														onClick={() => handleView(character.id)}
+														onClick={() =>
+															handleView(character.id)
+														}
 														className="gap-1"
 													>
 														<Eye className="w-4 h-4" />
@@ -168,7 +178,10 @@ export default function CharactersPage() {
 													<Button
 														size="sm"
 														onClick={() =>
-															handleDelete(character.id, character.name)
+															handleDelete(
+																character.id,
+																character.name,
+															)
 														}
 														className="gap-1 text-white bg-red-600"
 													>
